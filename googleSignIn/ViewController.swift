@@ -16,7 +16,8 @@ class ViewController: UIViewController, SFSafariViewControllerDelegate{
     
     @IBAction func login(_ sender: Any) {
         
-        if let url = URL(string: "https://accounts.google.com/o/oauth2/auth?response_type=code&scope=https://www.googleapis.com/auth/drive&client_id=559343420733-4su2m8cc9hm18glcoghtdmgqu9e8c3dq.apps.googleusercontent.com&redirect_uri=http%3A%2F%2Flocalhost%3A8080"){
+        let loginurl = "https://accounts.google.com/o/oauth2/auth?response_type=code&scope=https://www.googleapis.com/auth/drive&client_id=559343420733-4su2m8cc9hm18glcoghtdmgqu9e8c3dq.apps.googleusercontent.com&redirect_uri=http%3A%2F%2Flocalhost%3A8080"
+        if let url = URL(string: loginurl){
             let web = SFSafariViewController(url: url)
             web.delegate = self
             present(web, animated: true, completion: nil)
@@ -31,8 +32,6 @@ class ViewController: UIViewController, SFSafariViewControllerDelegate{
                 
             })
             self.code = request.query?["code"] ?? ""
-            // print("request is ",request)
-            //   print("code",self.code)
             return nil
         }
         server.start(withPort: 8080, bonjourName: nil)
